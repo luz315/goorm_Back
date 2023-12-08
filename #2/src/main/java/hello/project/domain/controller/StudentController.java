@@ -2,7 +2,6 @@ package hello.project.domain.controller;
 
 import hello.project.domain.entity.ApiResponse;
 import hello.project.domain.entity.ErrorCode;
-import hello.project.domain.entity.Student;
 import hello.project.domain.exception.CustomException;
 import hello.project.domain.exception.InputRestriction;
 import hello.project.domain.service.StudentService;
