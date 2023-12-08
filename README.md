@@ -1,7 +1,7 @@
 ## < 구름톤 트레이닝 백엔드 과제 목차 >
 <br>
 
-### #1. [응답/에러 모델 만들기]((https://github.com/luz315/goorm_Back/tree/main/%231))
+### #1. [응답/에러 모델 만들기](https://github.com/luz315/goorm_Back/tree/main/%231)
 <br>
 
 ### #2. [게시판 만들기]()
