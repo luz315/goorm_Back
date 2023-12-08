@@ -1,3 +1,33 @@
+## ◇ 백엔드 1번째 과제입니다◇
+###   🪄주제: Spring을 이용해 응답/에러 모델 만들기
+<br/> 
+
+###   🪄API 요구사항
+       - 이름과 성적을 입력받아 저장하는 api (성적이 6 이상이면 에러 응답 처리)
+       
+       - 입력된 성적을 조회 하는 api (성적 오름차순으로 조회)
+       
+       - 특정 성적을 입력받아 해당 성적의 학생만 조회하는 api
+   <br/>     
+
+###   🪄구현 요구사항
+       - Controller 에서 응답 모델 만들기
+
+          * ApiResponse<T>: 여러가지 데이터 타입(클래스)를 result 로 넣을 수 있도록 사용
+          * makeResponse(T result), makeResponse(List<T> results): 단건, 복수건 결과 응답 객체로 만들도록 구현
+          
+       - 에러응답을 만들기 위해서 @ExceptionHander를 사용하여 exception의 데이터 이용
+       
+       - exceptionHander에서 응답모델을 만들 때 필요한 데이터가 포함시킬 수 있는 customException 구현
+       
+          *ErrorCode 는 enum 으로 정의
+   <br/>     
+
+
+
+
+
+
 ## 웹 애플리케이션 계층 구조 
 
 - 엔터티
