@@ -357,4 +357,75 @@ option + enter
 [**Post** 방식] http://localhost:8080/**student** 실행하고 성적을 6이상으로 넣었을 경우 <br>
 
 <img width="375" alt="스크린샷 2023-12-07 오후 3 21 32" src="https://github.com/luz315/goorm_Back/assets/125282732/b6da041d-09bd-4b09-b89b-403f1230eb43">
+<br>
 
+---
+<br>
+
+## < 참고 >
+
+#### @RequiredArgsConstructor / private final~ 코드 조합 설명
+
+우리가 생성한 필드에 final이 들어가면 무조건 생성자를 만들어줘야 한다
+
+그리고 그 생성자를 자동으로 만들어주는 어노테이션이 @RequiredArgsConstructor이다
+</br>
+</br>
+
+#### 그렇다면 왜 생성자를 만들어야 하는가
+
+```java
+@Autowired
+
+private ~
+```
+
+* @Autowired는 스프링 빈에 등록되어 있는 것을 Injection 해준다
+</br>
+
+위와 같이 설정하는 것을 Field Injection 필드 인젝션이라고 한다 (기본 방식)
+
+기본 필드 바로 위에 @Autowired를 사용하는 필드 인젝션 단점은 변경하고 싶을 때 변경할 수가 없다는 것이다 (ex. 테스트 할 때)
+
+</br>
+
+
+#### 다른 방법 1) Setter Injection ( = command + N _ Setter 선택 )
+</br>
+
+Setter하고 위에 @Autowired를 붙여주는 셋터 인젝션 방식이다
+</br>
+</br>
+
+- **장점**: 테스트코드 작성할 때 Mock을 직접 주입 가능
+</br>
+
+- **단점**: 애플리케이션 돌아가는 도중에 누군가 바꿀 수 있다는 것 (하지만 그럴 일 거의 없음)
+
+</br>
+  
+
+#### 다른 방법 2) Constructor Injection ( = command + N _ Constructor 선택 )
+</br>
+
+Constructor 하고 위에 @Autowired를 붙여주는 생성자 인젝션 방식이다
+</br>
+</br>
+
+- **장점**: 생성할 때 이미 다 끝나 버리기 때문에 중간에 바꿀 수가 없기 때문에 셋터 인젝션의 단점을 보완할 수 있다
+</br>
+</br>
+
+그리고 요즘 스프링은 @Autowired를 자동으로 Injection하므로 **생략이 가능**하다
+
+나머지 필드 생성 코드에 final을 붙여주고 @RequiredArgsConstructor을 사용하면 생성자 또한 **생략이 가능**하다
+
+</br>
+
+#### 그렇게 해서 아래코드로 사용되는 것이다
+
+```java
+@RequiredArgsConstructor
+
+private final~
+```
