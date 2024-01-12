@@ -100,7 +100,7 @@ Spring:
   
 ### 1) Board
 
-- **@Getter @Setter** 롬복 ****넣기
+- **@Getter @Setter** 롬복 넣기
 - **@NoArgsConstructor**
     - 기본 생성자를 만들기
     - JPA를 사용할 때 기본적으로 요구되며, 프레임워크가 프록시를 생성하는 데 사용
@@ -119,10 +119,10 @@ Spring:
 - **@AllArgsConstructor**
     - 작성한 필드에 쓴 모든 생성자만 만들기
     - 테스트 코드나 빌더 패턴을 사용하지 않고 객체를 초기화할 때 유용
-- **@SQLDelete~**
+- **@SQLDelete**
     - **`board`** 테이블에서 특정 레코드의 **`DELETE_STATUS`** 컬럼 값을 'DELETE'로 변경
     - 실제로 데이터베이스에서 삭제하는 대신 "삭제됨" 상태로만 표시
-- **private ~** 필드 생성
+- **private** 필드 생성
     - 보드 넘버
     - 보드 제목
     - 보드 바디
@@ -148,8 +148,8 @@ Spring:
     - **CascadeType.ALL**
         - 부모 엔티티에 대한 모든 변경(생성, 업데이트, 삭제 등)이 자식 엔티티에도 적용
         (= 보드에 대한 작업이 코멘트에도 자동으로 전파)
-    - **@Where ~** soft delete
-    - **private ~** 필드 생성
+    - **@Where** soft delete
+    - **private** 필드 생성
     - 추가 매핑 (이미 comment 클래스에서 써서 안써도 괜찮다)
         - public Board addComment(String commentBody){
                 Comment comment = new Comment();
@@ -168,10 +168,10 @@ Spring:
 ### 2) Comment
 
 - **@Getter** **@Setter** 롬복넣기
-- **@SQLDelete~**
+- **@SQLDelete**
     - **`board`** 테이블에서 특정 레코드의 **`DELETE_STATUS`** 컬럼 값을 'DELETE'로 변경
     - 실제로 데이터베이스에서 삭제하는 대신 "삭제됨" 상태로만 표시
-- **private ~** 필드 생성
+- **private** 필드 생성
     - 코멘트 넘버
     - 코멘트 바디
     - enum
@@ -198,8 +198,9 @@ Spring:
 
 ### 3) DeleteStatus
 
-- *`ACTIVE*, *DELETE*`
-    <br/>     
+- **ACTIVE**, **DELETE**
+
+<br/>     
 
 
 
@@ -221,7 +222,7 @@ Spring:
     2. 요청받은 보드를 찾는다
     3. 업데이트 해준다
     
-- **@Query ~**
+- **@Query**
     - 특정 번호(**`boardNo`**)를 가진 게시글을 찾기
     - **`LEFT JOIN FETCH`** = **`Board`** 와 연관된 모든 댓글 함께 가져온다 (게시글+댓글)
     - **`WHERE b.boardNo = :boardNo`** = 검색하려는 게시글의 번호 지정
@@ -241,20 +242,20 @@ Spring:
 - **@Transactional** 얘는 습관
 - **@RequiredArgsConstructor**
     - final 또는 @NotNull 붙을 때에만 생성자 생성
-- **private final BoardRepository ~** repository를 주입
+- **private final BoardRepository** repository를 주입
     - Repository 주입 
     1) 생성자 주입(추천),   2) 빌드 주입,   3) 세터 주입
     ( final이면 생성자 무조건 해야 돼 option + enter )
 
-- **public BoardResponse writeBoard(BoardPostRequest request) ~**
+- **public BoardResponse writeBoard(BoardPostRequest request)**
     - 게시글 등록
         - 보드 객체 생성
         - 보드 객체에 입력받은 request의 제목, 본문, 삭제 상태(=ACTIVE) 설정
         - **보드 객체**를 **보드리포지토리**의 **save** 메서드 이용해서 **응답**으로 반환
 
-- **public List<BoardListResponse> searchBoardList(int page, int pageSize) ~**
+- **public List<BoardListResponse> searchBoardList(int page, int pageSize)**
     - 게시글 목록 조회
-        - **`findAllByDeleteStatus`** = **`DeleteStatus`**가 **`ACTIVE`**인 **`Board`** 엔티티들 조회
+        - **findAllByDeleteStatus** = **DeleteStatus**가 **ACTIVE**인 **Board** 엔티티들 조회
         - 삭제되지 않은 게시글들을 페이지네이션(페이지 번호, 한 페이지에 표시할 게시글의 수)과 
         정렬(내림차순) 조건에 맞추어 조회
         - **`BoardListResponse`** 를 리스트로 반환
@@ -282,13 +283,13 @@ Spring:
 - **@Transactional** 얘는 습관
 - **@RequiredArgsConstructor**
     - final 또는 @NotNull 붙을 때에만 생성자 생성
-- **private final BoardRepository ~** repository를 주입
+- **private final BoardRepository** repository를 주입
     - Repository 주입 
     1) 생성자 주입(추천),   2) 빌드 주입,   3) 세터 주입
     ( final이면 생성자 무조건 해야 돼 option + enter )
 
 - **`findBoardWithCommentByBoardNo`** = 요청된 게시글 번호에 해당하는 **`Board`** 엔티티 조회
-- **`Optional`**에서 게시글 존재 여부 확인 및 가져오기
+- **Optional**에서 게시글 존재 여부 확인 및 가져오기
 
 - **public BoardResponse writeComment(CommentPostRequest request)**
     - 댓글 등록
@@ -356,7 +357,7 @@ Spring:
 
 ### 1) BoardController
 
-- **private final BoardService ~** service를 주입
+- **private final BoardService** service를 주입
 
 - 게시글 등록
     - @PostMapping("board")
@@ -386,7 +387,7 @@ Spring:
 
 ### 2) CommentController
 
-- **private final CommentService ~** comment를 주입
+- **private final CommentService** comment를 주입
 
 - 댓글 등록
     - @PostMapping("comment”)
